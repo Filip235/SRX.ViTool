@@ -25,6 +25,8 @@ namespace SRX.ViTool.Utils
             ProcessFiles(files);
 
             filesProcessedCount = files.Length;
+
+            DeleteTempifEmpty();
         }
 
         private void ProcessFiles(string[] files)
@@ -75,5 +77,22 @@ namespace SRX.ViTool.Utils
                 ? dt.ToString("dd_MM_yyyy") + "_"
                 : "";
         }
+
+        private void DeleteTempifEmpty()
+        {
+            string tempDir = dir + "\\Temporary";
+            if (Directory.Exists(tempDir))
+            {
+               string [] folder = Directory.GetFiles(tempDir);
+                if(folder.Length == 0)
+                {
+                    Directory.Delete(tempDir);
+                }
+            }
+
+        }
+
+        
+
     }
 }
